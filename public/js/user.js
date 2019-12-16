@@ -1,7 +1,4 @@
 $(document).ready(function() {
-  // newUser = {};
-  // scores = [];
-
   $("#submit-user").on("click", function(event) {
     event.preventDefault();
 
@@ -25,13 +22,8 @@ $(document).ready(function() {
       powderhound: $("#q3").val()
     };
 
-    //console.log('newUser', newUser);
-    var scores = [
-      //$("#q1").val(),
-      $("#q2").val(),
-      $("#q3").val()
-    ];
-    console.log("scores", scores);
+    var scores = [$("#q2").val(), $("#q3").val()];
+    //console.log("scores", scores);
 
     $.ajax("/api/user", {
       type: "POST",
@@ -41,12 +33,9 @@ $(document).ready(function() {
         return result;
       }
     }).then(function(response) {
-      //console.log("newUser", newUser);
       var id = response.id;
 
-      //console.log('response', response.id);
-
-      console.log("new user created");
+      //console.log("new user created");
       window.location.href = "/user/" + id;
       res.json(res);
       //res.end();
@@ -58,25 +47,21 @@ $(document).ready(function() {
     $.ajax("/api/user", {
       type: "GET",
       success: function(result) {
-        //console.log(result);
         return result;
       }
     }).then(function(response) {
-      //console.log("response", response[0]);
-
       //placeholder for pulling my user info
-      var myUser = {
-        name: "Matt",
-        email: "matt@sbsef.com",
-        phone: "801-541-1587",
-        zipcode: "84117",
-        type: "Skier",
-        ability: "5",
-        powderhound: "5"
-      };
+      // var myUser = {
+      //   name: "Matt",
+      //   email: "matt@sbsef.com",
+      //   phone: "801-541-1587",
+      //   zipcode: "84117",
+      //   type: "Skier",
+      //   ability: "5",
+      //   powderhound: "5"
+      // };
 
       //placeholder for bestMatch
-      //console.log("response", response[14].ability);
       //var user = JSON.stringify(localStorage.setItem('user', {{{user}}}));
       console.log("user", myUser);
 
@@ -86,7 +71,6 @@ $(document).ready(function() {
 
       console.log("scores", scores);
 
-      // console.log("response", response);
       //setting variables to find match
       var myFriendScores = [4, 5];
       var scoresArr = [];
@@ -109,6 +93,7 @@ $(document).ready(function() {
 
         console.log("response", response);
       }
+
       //loop through scores to find best match in array
       for (var i = 0; i < scoresArr.length; i++) {
         if (scoresArr[i] <= scoresArr[bestMatch]) {
@@ -120,11 +105,6 @@ $(document).ready(function() {
       //return bestMatch data
       var yourBestFriend = response[bestMatch];
       res.json(yourBestFriend);
-
-      //push new friend object to list of friends array
-      //response.push(req.body);
     });
   });
 });
-
-
